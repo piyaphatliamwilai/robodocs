@@ -12,6 +12,8 @@ After a little bit of searching in the official documentation of NovaPi, the boa
 ### Utilizing the accelerometer
 Now instead of just using the acceleration value in the trigonometry calculation. Instead, we are going to track the acceleration and keep updating the values with every acceleration updates.
 ```py
+import novapi
+
 # position values
 pos_x = 0
 pos_y = 0
@@ -27,5 +29,7 @@ def update_position():
 while True:
   update_position() # call in a while loop
 ```
+### Finding out the robot's rotation
+Now we have the position, we now need another thing to use. The yaw of the robot. Yaw is the rotation on the horizontal axis. With the built in gyroscope inside the NovaPi.
 
 ---
