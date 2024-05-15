@@ -1,6 +1,6 @@
 # MakeX: Auto Aim
 > Written by Piyaphat Liamwilai and the CS6th team.
-> Updated, 14/5/24.
+> Updated, 15/5/24.
 ### Concept
 The concept of auto aim that we are talking about in this writeup is the ability for the robot to calculate the most optimal angles when the robot detected a target so that the robot can rotate to the angles and shoot at the target.
 ### But how?
@@ -30,6 +30,32 @@ while True:
   update_position() # call in a while loop
 ```
 ### Finding out the robot's rotation
-Now we have the position, we now need another thing to use. The yaw of the robot. Yaw is the rotation on the horizontal axis. With the built in gyroscope inside the NovaPi.
+Now we have the position, we now need another thing to use. The yaw of the robot. Yaw is the rotation on the horizontal axis. With the built in gyroscope inside the NovaPi, we are going to use the yaw value from the gyroscope.
+```py
+import novapi
 
+# position values
+pos_x = 0
+pos_y = 0
+pos_z = 0
+
+# rotation value
+yaw = 0
+
+def update_position():
+  global pos_x, pos_y, pos_z
+  # adding each acceleration values
+  pos_x += novapi.get_acceleration("x") 
+  pos_y += novapi.get_acceleration("y")
+  pos_z += novapi.get_acceleration("z")
+
+def update_rotation():
+  global yaw
+  # refreshing the rotation value
+  yaw = novapi.get_yaw()
+
+while True:
+  update_position() # call in a while loop
+  update_rotation()
+``` 
 ---
